@@ -60,7 +60,8 @@ httpd.serve_forever()
 ```
 
 ## OUTPUT:
-<img width="610" alt="image" src="https://github.com/MOHAMEDRIDWAN/webserver/assets/146993368/ba424929-5f37-44ee-985b-0ac19df53914">
+<img width="609" alt="image" src="https://github.com/MOHAMEDRIDWAN/webserver/assets/146993368/442d7dc9-97f1-4a33-b47f-05229459614e">
+
 
 ## RESULT:
 The program is executed succesfully
