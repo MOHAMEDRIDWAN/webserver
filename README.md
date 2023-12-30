@@ -27,40 +27,86 @@ Serving the HTML pages.
 Testing the webserver
 
 ## PROGRAM:
-```
-from http.server import HTTPServer,BaseHTTPRequestHandler
 
-content='''
-<!doctype html>
+## HTML:
+```
+<!DOCTYPE html>
 <html>
 <head>
-<title> My Web Server</title>
+  <title>Using Python's SimpleHTTPServer Module</title>
+  <style>
+    #rectangle {
+      height: 120px;
+      width: 100px;
+      background-color: #00f28f;
+    }
+  </style>
 </head>
 <body>
-<h1>Top Five Web Application Development Frameworks</h1>
-<h2>1.Django</h2>
-<h2>2. MEAN Stack</h2>
-<h2>3. React </h2>
+  <h2>Rectangle served by SimpleHTTPServer</h2>
+  <div id="rectangle">
+    <p>GOOGLE</p>
+    <p>FACEBOOK</p>
+    <p>AMAZON</p>
+    <p>VDART</p>
+
+  </div>
 </body>
 </html>
-'''
+```
+## PYTHON CODE:
+```
+import http.server
+import socketserver
 
-class MyServer(BaseHTTPRequestHandler):
+class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
-        print("Get request received...")
-        self.send_response(200) 
-        self.send_header("content-type", "text/html")       
-        self.end_headers()
-        self.wfile.write(content.encode())
+        if self.path == '/':
+            self.path = 'mywebpage.html'
+        return http.server.SimpleHTTPRequestHandler.do_GET(self)
 
-print("This is my webserver") 
-server_address =('',8000)
-httpd = HTTPServer(server_address,MyServer)
-httpd.serve_forever()
+# Create an object of the above class
+handler_object = MyHttpRequestHandler
+
+# Set the port number for the server
+PORT = 8080
+
+# Create the server and bind it to the specified port
+my_server = socketserver.TCPServer(("", PORT), handler_object)
+
+print(f"Serving on port {PORT}....")
+
+# Start the server - run indefinately
+my_server.serve_forever()
+```
+## PYTHON CODE 2:
+```
+import http.server
+import socketserver
+
+class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
+    def do_GET(self):
+        if self.path == '/':
+            self.path = 'mywebpage.html'
+        return http.server.SimpleHTTPRequestHandler.do_GET(self)
+
+# Create an object of the above class
+handler_object = MyHttpRequestHandler
+
+# Set the port number for the server
+PORT = 8080
+
+# Create the server and bind it to the specified port
+my_server = socketserver.TCPServer(("", PORT), handler_object)
+
+print(f"Serving on port {PORT}....")
+
+# Start the server - run indefinately
+my_server.serve_forever()
 ```
 
 ## OUTPUT:
-<img width="609" alt="image" src="https://github.com/MOHAMEDRIDWAN/webserver/assets/146993368/442d7dc9-97f1-4a33-b47f-05229459614e">
+<img width="922" alt="image" src="https://github.com/MOHAMEDRIDWAN/webserver/assets/146993368/a602a26a-bdc1-45bb-8942-3a1ea62c00dc">
 
 
 ## RESULT:
